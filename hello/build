@@ -1,1 +1,2 @@
 env GOOS=linux GOARCH=amd64 go build -a -ldflags '-s' -v . 
+docker build -t chenchun/hello .

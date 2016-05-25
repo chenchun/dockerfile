@@ -6,10 +6,6 @@ import (
 	"os"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello World from Go in minimal Docker container")
-}
-
 func main() {
 	message := "Hello World from Go in minimal Docker container"
 	if len(os.Args) > 1 {
