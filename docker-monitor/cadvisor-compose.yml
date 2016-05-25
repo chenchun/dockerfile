@@ -1,0 +1,20 @@
+opentsdb:
+  image: opentsdb 
+  ports:
+    - "4242:4242"
+  labels:
+    cluser: test
+cadvisor1:
+  image: cadvisor:ced5455
+  command: -storage_driver=opentsdb -storage_driver_db=cadvisor -storage_driver_host=opentsdb:4242 -storage_driver_buffer_duration=5s --housekeeping_interval=10s -profiling=true
+  ports:
+    - "8081:8080"
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+  links:
+    - opentsdb:opentsdb
+  labels:
+    cluser: test
