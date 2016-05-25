@@ -1,3 +1,3 @@
 env GOOS=linux GOARCH=amd64 go build -a -ldflags '-s' -v . 
-docker build -t chenchun/hello .
-docker build -f Dockerfile.port -t chenchun/hello:port .
+tar -cv hello | docker import - chenchun/hello
+docker build -f Dockerfile -t chenchun/hello:alpine .
