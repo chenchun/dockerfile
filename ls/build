@@ -1,0 +1,3 @@
+cd rootfs
+tar cv * | docker import - ls
+cd ..
