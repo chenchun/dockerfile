@@ -5,13 +5,12 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"math/rand"
+	"time"
 )
 
 func main() {
-	message := "Hello World from Go in minimal Docker container"
-	if len(os.Args) > 1 {
-		message = os.Args[1]
-	}
+	message := resolveMessage()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, message)
 	})
@@ -28,4 +27,17 @@ func main() {
 	if err != nil {
 		panic("ListenAndServe: " + err.Error())
 	}
+}
+
+func resolveMessage() string {
+	message := "Hello World from Go in minimal Docker container"
+	if len(os.Args) > 1 {
+		message = os.Args[1]
+	}
+	if os.Getenv("RANDOM") != "" {
+		rand.Seed(time.Now().Unix())
+		// add random strings to message
+		message = fmt.Sprintf("server %d: %s", rand.Intn(1000), message)
+	}
+	return message
 }
