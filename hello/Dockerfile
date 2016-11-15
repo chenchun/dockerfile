@@ -1,3 +1,3 @@
 FROM alpine
 ADD hello /
-CMD /hello
+CMD ["/hello"]
