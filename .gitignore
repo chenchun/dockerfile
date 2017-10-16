@@ -1,2 +1,5 @@
 hello/hello
+upload-server/upload
 .git
+*.iml
+.idea
