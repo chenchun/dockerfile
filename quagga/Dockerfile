@@ -5,7 +5,9 @@ RUN apt-get update \
     supervisor quagga telnet tcpdump vim net-tools wget lv \
     && rm -rf /var/lib/apt/lists/*
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD zebra.conf /etc/quagga/zebra.conf
 ADD daemons /etc/quagga/daemons
+ADD start.sh /opt
+RUN sed -i 's/zebra=no/zebra=yes/g' /etc/quagga/daemons \
+    && cp /usr/share/doc/quagga-core/examples/zebra.conf.sample /etc/quagga/zebra.conf
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/opt/start.sh"]
