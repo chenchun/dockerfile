@@ -2,10 +2,10 @@ FROM golang:1.11-stretch
 
 RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
-    supervisor quagga telnet tcpdump vim net-tools \
+    supervisor quagga telnet tcpdump vim net-tools wget lv \
     && rm -rf /var/lib/apt/lists/*
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN sed -i 's/zebra=no/zebra=yes/g' /etc/quagga/daemons \
-    && cp /usr/share/doc/quagga/examples/zebra.conf.sample /etc/quagga/zebra.conf
+ADD zebra.conf /etc/quagga/zebra.conf
+ADD daemons /etc/quagga/daemons
 
 CMD ["/usr/bin/supervisord"]
