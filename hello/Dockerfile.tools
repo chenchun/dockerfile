@@ -1,5 +1,5 @@
 FROM alpine
 ADD hello /
-RUN apk add --update curl bash && \
+RUN apk add --update curl bash strace && \
     rm -rf /var/cache/apk/*
 CMD ["/hello"]
