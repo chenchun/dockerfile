@@ -3,3 +3,4 @@ upload-server/upload
 .git
 *.iml
 .idea
+/stress/pkg/main.go
