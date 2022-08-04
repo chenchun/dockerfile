@@ -1,4 +1,4 @@
-env GOOS=linux GOARCH=amd64 go build -a -ldflags '-s' -v . 
+env GOOS=linux GOARCH=amd64 CGO_ENABLED=0  go build -a -ldflags '-s' -v .
 tar -cv hello | docker import - chenchun/hello:simple
 docker build -f Dockerfile -t chenchun/hello:alpine .
 docker build -f Dockerfile.tools -t chenchun/hello .
